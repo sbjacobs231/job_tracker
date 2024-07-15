@@ -1,3 +1,4 @@
+# DB SETUP
 DROP DATABASE IF EXISTS job_tracker;
 CREATE DATABASE job_tracker;
 USE job_tracker;
@@ -103,6 +104,7 @@ INSERT INTO `status` (
     'Interested'
 );
 
+# Add demo data
 INSERT INTO user (
     first_name,
     last_name,
@@ -113,4 +115,76 @@ INSERT INTO user (
     'User',
     'testuser',
     'password'
+);
+INSERT INTO job (
+    title,
+    company,
+    salary,
+    location,
+    apply_date
+) VALUES (
+    'Software Engineer',
+    'Google',
+    100000,
+    'Mountain View, CA',
+    '2021-01-01'
+);
+INSERT INTO progress (
+    description,
+    date
+) VALUES (
+    'Applied',
+    '2021-01-01'
+);
+
+INSERT INTO skill (
+    name
+) VALUES (
+    'JavaScript'
+);
+INSERT INTO contact (
+    first_name,
+    last_name,
+    email,
+    phone_number
+) VALUES (
+    'John',
+    'Doe',
+    'john@google.com',
+    '1234567890'
+);
+INSERT INTO job_status (
+    job_id,
+    status_id
+) VALUES (
+    1,
+    1
+);
+INSERT INTO job_progress (
+    job_id,
+    progress_id
+) VALUES (
+    1,
+    1
+);
+INSERT INTO job_skill (
+    job_id,
+    skill_id
+) VALUES (
+    1,
+    1
+);
+INSERT INTO job_contact (
+    job_id,
+    contact_id
+) VALUES (
+    1,
+    1
+);
+INSERT INTO user_job (
+    user_id,
+    job_id
+) VALUES (
+    1,
+    1
 );
