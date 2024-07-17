@@ -5,13 +5,18 @@
   "scripts": {
     "server": "npm run prebuild && npm start",
     "start": "node index.js",
-    "prebuild": "cd .. && cd client && npm install && npm run build"
+    "prebuild": "cd .. && cd client && npm install && npm run build",
+    "create-db": "node run-schema.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "fs-extra": "^11.2.0",
+    "mysql2": "^3.10.2",
+    "path": "^0.12.7"
   }
 }
