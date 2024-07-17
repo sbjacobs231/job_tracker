@@ -1,14 +1,28 @@
-const express = require("express");
-const path = require("path");
-const app = express();
-const publicPath = path.join(__dirname, "..", "client/build");
+import dotenv from "dotenv";
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
-require("dotenv").config();
+import usersRoutes from "./routes/users.js";
+import loginRoutes from "./routes/login.js";
+
+dotenv.config();
+
+const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const publicPath = path.join(__dirname, "..", "client/build");
 
 app.use(express.static(publicPath));
 
-app.get("/*", function (req, res) {
-    res.sendFile(path.join(publicPath, "index.html"));
+app.use(express.json());
+
+app.use("/api", usersRoutes);
+app.use("/api", loginRoutes);
+
+app.get("/", (req, res) => {
+    res.sendFile(join(publicPath, "index.html"));
 });
 
 app.listen(process.env.EXPRESS_PORT, () => {
