@@ -22,7 +22,7 @@ app.use("/api", usersRoutes);
 app.use("/api", loginRoutes);
 
 app.get("/", (req, res) => {
-    res.sendFile(join(publicPath, "index.html"));
+    res.sendFile(path.join(publicPath, "index.html"));
 });
 
 app.listen(process.env.EXPRESS_PORT, () => {
