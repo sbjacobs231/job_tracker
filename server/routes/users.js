@@ -1,10 +1,11 @@
 import Router from "express";
 
 import pool from "../util/database.js";
+import { authenticateToken } from "../util/token.js";
 
 const router = Router();
 
-router.get("/users", async (req, res) => {
+router.get("/users", authenticateToken, async (req, res) => {
     const sql = `
         SELECT
             id,
@@ -49,7 +50,7 @@ router.post("/users", async (req, res) => {
     }
 });
 
-router.get("/users/:id", async (req, res) => {
+router.get("/users/:id", authenticateToken, async (req, res) => {
     const sql = `
         SELECT
             id,
