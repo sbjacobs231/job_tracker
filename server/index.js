@@ -21,7 +21,7 @@ app.use(express.json());
 app.use("/api", usersRoutes);
 app.use("/api", loginRoutes);
 
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
     res.sendFile(path.join(publicPath, "index.html"));
 });
 
