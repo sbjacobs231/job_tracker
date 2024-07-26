@@ -1,0 +1,86 @@
+div.align-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding: 2rem;
+}
+
+div.content {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+div.content * {
+  font-weight: 500;
+}
+
+div.content > * {
+  box-shadow: .25rem .1rem .5rem #eeeeee;
+  margin: 2rem;
+}
+
+div.scrollable-table {
+  max-width: 80vw;
+  overflow-x: auto;
+}
+
+form {
+  border: .01rem solid #eeeeee;
+  max-width: 20vw;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+input, option, select {
+  border: .01rem solid #eeeeee;
+  border-radius: .5rem;
+  display: block;
+  padding: .75rem;
+}
+
+label {
+  display: block;
+  font-size: .9rem;
+  text-align: left;
+  margin-top: .75rem;
+}
+
+span.submit {
+  background-color: #eeeeee;
+  border-radius: 1rem;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .75rem 2rem;
+}
+
+span.submit:hover {
+  background-color: #eeeeee90;
+}
+
+span.submit:active {
+  background-color: #eeeeee;
+}
+
+table {
+  border: .01rem solid #eeeeee;
+  border-collapse: collapse;
+}
+
+td, th {
+  min-width: 8rem;
+  padding: 1.5rem;
+  text-align: left;
+}
+
+th {
+  border-bottom: .01rem solid #212529;
+  padding-bottom: 1rem;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
