@@ -111,7 +111,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Update job
+// Update job (by id)
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { title, company, salary, location, apply_date } = req.body;
@@ -120,11 +120,12 @@ router.put('/:id', async (req, res) => {
         await pool.query(sql, [title, company, salary, location, apply_date, id]);
         res.json({ message: 'Job updated successfully' });
     } catch (err) {
-        res.status(500).send(err);
+        console.error('Error updating job:', err);
+        res.status(500).json({ err: 'Internal Server Error' });
     }
 });
 
-// Delete job
+// Delete job (by id)
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     const sql = 'DELETE FROM job WHERE id = ?';
