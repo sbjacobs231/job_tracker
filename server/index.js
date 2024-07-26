@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use("/api", usersRoutes);
 app.use("/api", loginRoutes);
-app.use("/api/jobs", jobRoutes); // Use job routes
+app.use("/api/jobs", jobRoutes);
 
 app.get("/*", (req, res) => {
     res.sendFile(path.join(publicPath, "index.html"));
