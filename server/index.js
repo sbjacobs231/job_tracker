@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -9,6 +10,7 @@ import loginRoutes from "./routes/login.js";
 dotenv.config();
 
 const app = express();
+app.use(cookieParser());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

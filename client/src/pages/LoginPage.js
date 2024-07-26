@@ -19,12 +19,15 @@ function Login() {
     })
     .then(response => {
       if (response.ok) {
-        navigate('/dashboard');
-      } else {
-        setInvalidInput(true);
+        return response.json();
       }
     })
-    .catch(error => console.log(error));
+    .then(data => {
+      const token = data.token;
+      document.cookie = `token=${token}`;
+      navigate('/dashboard');
+    })
+    .catch(error => setInvalidInput(true));
   };
 
   const changeInput = (e) => {
