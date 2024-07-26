@@ -7,7 +7,7 @@
     "server": "npm run prebuild && npm start",
     "start": "node index.js",
     "prebuild": "cd .. && cd client && npm install && npm run build",
-    "create-db": "node run-schema.js"
+    "seed-db": "node run-schema.js"
   },
   "keywords": [],
   "author": "",

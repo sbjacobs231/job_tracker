@@ -1,15 +1,42 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [invalidInput, setInvalidInput] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password })
+    })
+    .then(response => {
+      if (response.ok) {
+        navigate('/dashboard');
+      } else {
+        setInvalidInput(true);
+      }
+    })
+    .catch(error => console.log(error));
   };
+
+  const changeInput = (e) => {
+    setInvalidInput(false);
+    if (e.target.id === "formBasicUsername") {
+      setUsername(e.target.value);
+    } else if (e.target.id === "formBasicPassword") {
+      setPassword(e.target.value);
+    } else {
+      console.error("Invalid input type");
+    }
+  }
 
   return (
     <Container className="p-5">
@@ -17,14 +44,15 @@ function Login() {
         <Col md={6}>
           <h2 className="text-center">Login</h2>
           <Form onSubmit={handleSubmit} className="mb-3 mt-5">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+            <Form.Group className="mb-3" controlId="formBasicUsername">
+              <Form.Label>Username</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                placeholder="Enter username"
+                value={username}
+                onChange={changeInput}
                 required
+                isInvalid={invalidInput}
               />
             </Form.Group>
 
@@ -34,8 +62,9 @@ function Login() {
                 type="password"
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={changeInput}
                 required
+                isInvalid={invalidInput}
               />
             </Form.Group>
 

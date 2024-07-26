@@ -24,12 +24,17 @@ router.post("/login", async (req, res) => {
                 req.body.password,
             ],
         );
+
+        if (results.length === 0) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        
         const id = results[0].id;
         const token = generateToken(id);
-        res.json({"token": token});
+        return res.status(200).json({"token": token});
     } catch (error) {
         console.log(error);
-        res.json({"error": "Invalid credentials"});
+        return res.status(401).json({"error": "Invalid credentials"});
     }
 });
 
