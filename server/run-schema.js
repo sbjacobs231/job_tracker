@@ -1,10 +1,13 @@
-const fs = require("fs-extra");
-const path = require("path");
-const mysql = require("mysql2");
-const dotenv = require("dotenv");
+import fs from "fs-extra";
+import path from "path";
+import mysql from "mysql2";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
 dotenv.config();
 
 // Read SQL file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const schemaPath = path.join(__dirname, "schema.sql");
 const schemaSQL = fs.readFileSync(schemaPath, "utf-8");
 

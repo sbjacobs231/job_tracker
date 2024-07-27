@@ -13,8 +13,7 @@ export const generateToken = (id) => {
 
 export const authenticateToken = (req, res, next) => {
     try {
-        const authHeader = req.headers["authorization"];
-        const token = authHeader.split(" ")[1];
+        const token = req?.cookies?.token;
         const user = jsonwebtoken.verify(token, process.env.TOKEN_SECRET);
         req.user = user;
         next();
