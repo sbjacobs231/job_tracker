@@ -19,7 +19,7 @@ function Dashboard() {
     return (
       <div>
         <Header />
-        <div className="align-center">
+        <div className="dashboard-page align-center">
           <div className="content">
             <div>
               <div className="scrollable-table">
