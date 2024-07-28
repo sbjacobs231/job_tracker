@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import Login from './pages/LoginPage';
 import Signup from './pages/SignupPage';
-import JobDashboard from './pages/JobDashboardPage';
 import Header from './components/Header';
 import Dashboard from './pages/DashboardPage';
 
