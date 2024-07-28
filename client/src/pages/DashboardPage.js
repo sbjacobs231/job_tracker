@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "../dashboard-page.css";
-import Header from "../components/Header";
 import DashboardTable from "../components/DashboardTable";
 import JobForm from "../components/JobForm";
 
@@ -21,7 +20,6 @@ function Dashboard() {
 
     return (
       <div>
-        <Header />
         <div className="dashboard-page align-center">
           <div className="content">
             <div>
