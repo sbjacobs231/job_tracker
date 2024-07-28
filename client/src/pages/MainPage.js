@@ -16,7 +16,6 @@ function MainPage() {
 
     return (
         <div>
-            <Header />
             <div className="p-5 text-center bg-light">
                 <Row>
                     <Col>
