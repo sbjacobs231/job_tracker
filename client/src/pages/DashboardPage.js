@@ -1,22 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../dashboard-page.css";
 import DashboardTable from "../components/DashboardTable";
 import JobForm from "../components/JobForm";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-    const data = [
-      {
-        id: 1,
-        title: "Data Engineer",
-        company: "Patagonia",
-        salary: 120000,
-        location: "Remote",
-        apply_date: "2024-07-25",
-        status: "Applied"
-      }
-    ];
 
-    const [jobs, setJobs] = useState(data);
+    const navigate = useNavigate();
+
+    const [jobs, setJobs] = useState([]);
+
+    useEffect(() => {
+      fetchJobs();
+    }, []);
+
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get('/api/jobs');
+        setJobs(response.data);
+      } catch (error) {
+        navigate("/login");
+      }
+    };
 
     return (
       <div>

@@ -71,13 +71,14 @@
 
 import express from 'express';
 import pool from '../util/database.js';
+import { authenticateToken } from '../util/token.js';
 
 const router = express.Router();
 
 // Base route in index.js: app.use("/api/jobs", jobRoutes);
 
 // Get all jobs
-router.get('/', async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
     const sql = 'SELECT * FROM job';
     try {
         const [results] = await pool.query(sql);
