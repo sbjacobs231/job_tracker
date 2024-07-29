@@ -72,7 +72,7 @@ div.dashboard-page table {
 }
 
 div.dashboard-page td, th {
-  min-width: 8rem;
+  max-width: 10rem;
   padding: 1.5rem;
   text-align: left;
 }
