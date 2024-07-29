@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import "../dashboard-page.css";
 import DashboardTable from "../components/DashboardTable";
 import JobForm from "../components/JobForm";
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
@@ -17,12 +16,16 @@ function Dashboard() {
 
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('/api/jobs');
-        setJobs(response.data);
+        const url = "/api/jobs";
+        const response = await fetch(url);
+        const data = await response.json();
+        setJobs(data);
       } catch (error) {
+        console.log(error);
+        setJobs([]);
         navigate("/login");
       }
-    };
+    }
 
     return (
       <div>
@@ -37,6 +40,7 @@ function Dashboard() {
               <JobForm 
                 jobs={jobs} 
                 setJobs={setJobs} 
+                fetchJobs={fetchJobs} 
               />
             </div>
           </div>
