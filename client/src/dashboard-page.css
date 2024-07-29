@@ -1,0 +1,88 @@
+div.dashboard-page div.align-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding: 2rem;
+}
+
+div.dashboard-page div.content {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+div.dashboard-page div.content * {
+  font-weight: 500;
+}
+
+div.dashboard-page div.content > * {
+  box-shadow: .25rem .1rem .5rem #eeeeee;
+  margin: 2rem;
+}
+
+div.dashboard-page div.scrollable-table {
+  max-width: 80vw;
+  overflow-x: auto;
+}
+
+div.dashboard-page form {
+  border: .01rem solid #eeeeee;
+  max-width: 80vw;
+  min-width: 15vw;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+div.dashboard-page input, div.dashboard-page option, div.dashboard-page select {
+  border: .01rem solid #eeeeee;
+  border-radius: .5rem;
+  display: block;
+  padding: .75rem;
+}
+
+div.dashboard-page label {
+  display: block;
+  font-size: .9rem;
+  text-align: left;
+  margin-top: .75rem;
+}
+
+div.dashboard-page span.submit {
+  background-color: #eeeeee;
+  border-radius: 1rem;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .75rem 2rem;
+}
+
+div.dashboard-page span.submit:hover {
+  background-color: #eeeeee90;
+}
+
+div.dashboard-page span.submit:active {
+  background-color: #eeeeee;
+}
+
+div.dashboard-page table {
+  border: .01rem solid #eeeeee;
+  border-collapse: collapse;
+}
+
+div.dashboard-page td, th {
+  max-width: 10rem;
+  padding: 1.5rem;
+  text-align: left;
+}
+
+div.dashboard-page th {
+  border-bottom: .01rem solid #212529;
+  padding-bottom: 1rem;
+  text-align: left;
+}
+
+div.dashboard-page tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
