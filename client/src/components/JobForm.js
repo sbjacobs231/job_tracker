@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../dashboard-page.css";
 
-function JobForm({ jobs, setJobs }) {
+function JobForm({ jobs, setJobs, fetchJobs }) {
     const [title, setTitle] = useState("");
     const [company, setCompany] = useState("");
     const [salary, setSalary] = useState("");
@@ -29,14 +29,13 @@ function JobForm({ jobs, setJobs }) {
       setStatus(1);
     }
 
-    const createJob = () => {
+    const createJob = async () => {
       const form = document.querySelector("#job-form");
       if (form.checkValidity() === false) {
         alert("Please enter a title, company, and apply date.")
         return;
       }
       const job = {
-        id: jobs.length + 1,
         title: title,
         company: company,
         salary: salary,
@@ -44,8 +43,26 @@ function JobForm({ jobs, setJobs }) {
         apply_date: applyDate,
         status: statusMap[status],
       }
-      setJobs([...jobs, job]);
-      resetForm();
+      try {
+        const url = "/api/jobs";
+        const headers = {
+          "Content-Type": "application/json",
+        };
+        const response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(job),
+          headers: headers,
+        });
+        if (!response.ok) {
+          const error = await response.text();
+          console.log(error);
+          return;
+        }
+        await fetchJobs();
+        resetForm();
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     return (
@@ -94,7 +111,7 @@ function JobForm({ jobs, setJobs }) {
             id="status" 
             value={status} 
             required
-            onChange={(event) => setStatus(parseInt(event.target.value))} 
+            onChange={(event) => setStatus(parseFloat(event.target.value))} 
           >
             <option value="1">Applied</option>
             <option value="2">Interview Scheduled</option>
