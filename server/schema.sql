@@ -18,6 +18,7 @@ CREATE TABLE job (
     salary DECIMAL(10, 2) NULL,
     location VARCHAR(255) NOT NULL,
     apply_date DATE NOT NULL,
+    status INT NOT NULL,
     PRIMARY KEY (id)
 );
 CREATE TABLE status (
@@ -121,13 +122,15 @@ INSERT INTO job (
     company,
     salary,
     location,
-    apply_date
+    apply_date,
+    status
 ) VALUES (
     'Software Engineer',
     'Google',
     100000,
     'Mountain View, CA',
-    '2021-01-01'
+    '2021-01-01',
+    1
 );
 INSERT INTO progress (
     description,
