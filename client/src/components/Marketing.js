@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function Marketing({ heading, text }) {
     return (
@@ -8,7 +7,7 @@ function Marketing({ heading, text }) {
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
             </svg>
-            <h2 className="fw-normal">{heading}</h2>
+            <h2>{heading}</h2>
             <p>{text}</p>
             <p><a className="btn btn-secondary" href="#">View details &raquo;</a></p>
         </div>

@@ -8,15 +8,16 @@
     justify-content: left;
 }
 
-.hero-header {
-    color: rgb(30, 30, 74);
-}
-.hero-text {
-    color: rgb(44, 44, 57);
+.features-section {
+    margin-top: 4rem;
 }
 
-.features-section {
-    margin-top: 3rem;
+.features-section h2 {
+    margin-top: 1rem;
+}
+
+.features-section .btn {
+    margin-bottom: 4rem;
 }
 
 @media (max-width: 768px) {
