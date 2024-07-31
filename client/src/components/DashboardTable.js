@@ -21,7 +21,7 @@ function DashboardTable({ jobs }) {
                         <td>{job.company}</td>
                         <td>{job.salary}</td>
                         <td>{job.location}</td>
-                        <td>{job.apply_date}</td>
+                        <td>{job.apply_date.split("T")[0]}</td>
                         <td>{job.status}</td>
                     </tr>
                     ))}
