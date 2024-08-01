@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import usersRoutes from "./routes/users.js";
 import loginRoutes from "./routes/login.js";
 import jobRoutes from "./routes/jobRoutes.js";
+import signupRoutes from "./routes/signupRoutes.js"
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use("/api", usersRoutes);
 app.use("/api", loginRoutes);
 app.use("/api/jobs", jobRoutes);
+app.use("/api/signup", signupRoutes);
 
 app.get("/*", (req, res) => {
     res.sendFile(path.join(publicPath, "index.html"));
