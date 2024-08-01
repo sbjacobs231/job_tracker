@@ -26,7 +26,15 @@ function Signup() {
       });
       const data = await response.json();
       alert(data.message)
+      clearForm();
     };
+
+    const clearForm = () => {
+      setFirstName('');
+      setLastName('');
+      setPassword('');
+      setConfirmPassword('');
+    }
 
     return (
     <Container className="p-5">
