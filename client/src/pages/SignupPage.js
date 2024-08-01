@@ -32,6 +32,7 @@ function Signup() {
     const clearForm = () => {
       setFirstName('');
       setLastName('');
+      setUsername('');
       setPassword('');
       setConfirmPassword('');
     }
