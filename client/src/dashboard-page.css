@@ -5,6 +5,17 @@ div.dashboard-page div.align-center {
   padding: 2rem;
 }
 
+div.dashboard-page div.chart-container {
+  border: .01rem solid #eeeeee;
+  min-height: 30vw;
+  min-width: 60vw;
+  padding: 1rem;
+}
+
+div.dashboard-page div.chart-container h2 {
+  font-size: 1rem;
+}
+
 div.dashboard-page div.content {
   align-items: flex-start;
   display: flex;
