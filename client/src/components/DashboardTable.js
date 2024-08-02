@@ -1,8 +1,29 @@
-function DashboardTable({ jobs, deleteJob }) {
+function DashboardTable({ jobs, updateForm, deleteJob }) {
 
-    const callDeleteJob = (event) => {
+    const handleDeleteClick = (event) => {
         const id = event.target.parentElement.parentElement.id;
         deleteJob(id);
+    }
+
+    const handleUpdateClick = (event) => {
+        const tr = event.target.parentElement.parentElement;
+        const job = {
+            id: null,
+            title: null,
+            company: null,
+            salary: null,
+            location: null,
+            applyDate: null,
+        }
+        for (let td of tr.children) {
+            if (td.id === "id") { job.id = td.getAttribute("data-value") }
+            else if (td.id === "title") { job.title = td.getAttribute("data-value") }
+            else if (td.id === "company") { job.company = td.getAttribute("data-value") }
+            else if (td.id === "salary") { job.salary = td.getAttribute("data-value") }
+            else if (td.id === "location") { job.location = td.getAttribute("data-value") }
+            else if (td.id === "apply-date") { job.applyDate = td.getAttribute("data-value") }
+        }
+        updateForm(job);
     }
 
     return (
@@ -22,16 +43,17 @@ function DashboardTable({ jobs, deleteJob }) {
                 <tbody>
                     {jobs.map(job => (
                     <tr id={job.id} key={job.id}>
-                        <td>{job.id}</td>
-                        <td>{job.title}</td>
-                        <td>{job.company}</td>
-                        <td>{job.salary}</td>
-                        <td>{job.location}</td>
-                        <td>{job.apply_date.split("T")[0]}</td>
+                        <td id="id" data-value={job.id}>{job.id}</td>
+                        <td id="title" data-value={job.title}>{job.title}</td>
+                        <td id="company" data-value={job.company}>{job.company}</td>
+                        <td id="salary" data-value={job.salary}>{job.salary}</td>
+                        <td id="location" data-value={job.location}>{job.location}</td>
+                        <td id="apply-date" data-value={job.apply_date.split("T")[0]}>{job.apply_date.split("T")[0]}</td>
                         <td>
                             <i
                                 id="update-job"
                                 className="bi bi-pencil"
+                                onClick={(event) => { handleUpdateClick(event) }}
                             >
                             </i>
                         </td>
@@ -39,7 +61,7 @@ function DashboardTable({ jobs, deleteJob }) {
                             <i 
                                 id="delete-job"
                                 className="bi bi-trash"
-                                onClick={(event) => { callDeleteJob(event) }}
+                                onClick={(event) => { handleDeleteClick(event) }}
                             >
                             </i>
                         </td>
