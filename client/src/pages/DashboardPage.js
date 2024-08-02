@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../dashboard-page.css";
+import CountPerDayChart from "../components/CountPerDayChart";
 import DashboardTable from "../components/DashboardTable";
 import JobForm from "../components/JobForm";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ function Dashboard() {
     const navigate = useNavigate();
 
     const [jobs, setJobs] = useState([]);
+    const [countPerDayData, setCountPerDayData] = useState({ labels: [], datasets: [] });
     const [id, setId] = useState("");
     const [title, setTitle] = useState("");
     const [company, setCompany] = useState("");
@@ -62,6 +64,29 @@ function Dashboard() {
       }
     }
 
+    const fetchCountPerDay = async () => {
+      try {
+        const url = "/api/metrics/count-per-day";
+        const response = await fetch(url);
+        const data = await response.json();
+        const dates = await data.dates.map((date) => date.split("T")[0]);
+        const counts = data.counts;
+        const config = {
+          labels: dates,
+          datasets: [
+            {
+              data: counts,
+            }
+          ],
+        }
+        setCountPerDayData(config);
+      } catch (error) {
+        console.log(error);
+        setCountPerDayData({});
+        navigate("/login");
+      }
+    }
+
     const createJob = async () => {
       const form = document.querySelector("#job-form");
       if (form.checkValidity() === false) {
@@ -91,6 +116,7 @@ function Dashboard() {
           return;
         }
         await fetchJobs();
+        await fetchCountPerDay();
         resetForm();
       } catch (error) {
         console.log(error);
@@ -127,6 +153,7 @@ function Dashboard() {
           return;
         }
         await fetchJobs();
+        await fetchCountPerDay();
         resetForm();
       } catch (error) {
         console.log(error);
@@ -153,6 +180,7 @@ function Dashboard() {
           return;
         }
         await fetchJobs();
+        await fetchCountPerDay();
         resetForm();
       } catch (error) {
         console.log(error);
@@ -161,11 +189,17 @@ function Dashboard() {
 
     useEffect(() => {
       fetchJobs();
+      fetchCountPerDay();
     }, []);
 
     return (
       <div>
         <div className="dashboard-page align-center">
+          <div className="content">
+            <CountPerDayChart 
+              countPerDayData={countPerDayData}
+            />
+          </div>
           <div className="content">
             <div>
               <DashboardTable 
