@@ -1,7 +1,13 @@
-function JobForm({ form, createJob }) {
+function JobForm({ form, saveJob }) {
     return (
       <div>
         <form id="job-form">
+          <input
+            id="id"
+            type="text"
+            value={form.id}
+            hidden
+          />
           <label htmlFor="title">Title</label>
           <input
             id="title" 
@@ -40,7 +46,14 @@ function JobForm({ form, createJob }) {
             required
             onChange={(event) => form.setApplyDate(event.target.value)} 
           />
-          <span className="submit" onClick={createJob}>Add job</span>
+          <span
+            className="submit"
+            tabIndex={0}
+            onClick={saveJob}
+            onKeyUp={ (event) => { if (event.key === "Enter") { saveJob() } } }
+          >
+            Submit
+          </span>
         </form>
       </div>
     )
