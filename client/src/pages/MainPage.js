@@ -3,6 +3,9 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './mainpage.css';
 import Marketing from '../components/Marketing';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave, faTasks, faChartLine } from '@fortawesome/free-solid-svg-icons';
+
 
 function MainPage() {
     const navigate = useNavigate(); // Initialize useNavigate
@@ -32,15 +35,14 @@ function MainPage() {
             <Container className="features-section text-center">
                 <Row>
                     <Col md={4}>
-                        <Marketing heading="Save Jobs" text="Save jobs throughout your search
-                        A fast, convenient way to bookmark jobs"/>
+                        <Marketing icon={faSave} heading="Save Jobs" text="Save jobs throughout your search. A fast, convenient way to bookmark jobs."/>
                     </Col>
                     <Col md={4}>
-                        <Marketing heading="Track & Organize" text="Keep a high level view of your job search pipeline" />
+                        <Marketing icon={faTasks} heading="Track & Organize" text="Keep a high level view of your job search pipeline." />
                     
                     </Col>
                     <Col md={4}>
-                        <Marketing heading="Get Insights" text="View rich keyword & skill insights for every job" />
+                        <Marketing icon={faChartLine} heading="Get Insights" text="View rich keyword & skill insights for every job." />
                     </Col>
                 </Row>
             </Container>

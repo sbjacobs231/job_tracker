@@ -1,15 +1,12 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Marketing({ heading, text }) {
+function Marketing({ icon, heading, text }) {
     return (
         <div>
-            <svg className="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-            </svg>
+            <FontAwesomeIcon icon={icon} size="4x" className="mb-3" />
             <h2>{heading}</h2>
             <p>{text}</p>
-            <p><a className="btn btn-secondary" href="#">View details &raquo;</a></p>
         </div>
     );
 }
