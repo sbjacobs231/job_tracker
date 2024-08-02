@@ -1,4 +1,10 @@
-function DashboardTable({ jobs }) {
+function DashboardTable({ jobs, deleteJob }) {
+
+    const callDeleteJob = (event) => {
+        const id = event.target.parentElement.parentElement.id;
+        deleteJob(id);
+    }
+
     return (
         <div className="scrollable-table">
             <table>
@@ -15,15 +21,28 @@ function DashboardTable({ jobs }) {
                 </thead>
                 <tbody>
                     {jobs.map(job => (
-                    <tr key={job.id}>
+                    <tr id={job.id} key={job.id}>
                         <td>{job.id}</td>
                         <td>{job.title}</td>
                         <td>{job.company}</td>
                         <td>{job.salary}</td>
                         <td>{job.location}</td>
                         <td>{job.apply_date.split("T")[0]}</td>
-                        <td><i id="update-job" className="bi bi-pencil"></i></td>
-                        <td><i id="delete-job" className="bi bi-trash"></i></td>
+                        <td>
+                            <i
+                                id="update-job"
+                                className="bi bi-pencil"
+                            >
+                            </i>
+                        </td>
+                        <td>
+                            <i 
+                                id="delete-job"
+                                className="bi bi-trash"
+                                onClick={(event) => { callDeleteJob(event) }}
+                            >
+                            </i>
+                        </td>
                     </tr>
                     ))}
                 </tbody>
