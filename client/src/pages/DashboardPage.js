@@ -9,6 +9,7 @@ function Dashboard() {
     const navigate = useNavigate();
 
     const [jobs, setJobs] = useState([]);
+    const [id, setId] = useState("");
     const [title, setTitle] = useState("");
     const [company, setCompany] = useState("");
     const [salary, setSalary] = useState("");
@@ -16,6 +17,8 @@ function Dashboard() {
     const [applyDate, setApplyDate] = useState("");
 
     const form = {
+      id: id,
+      setId: setId,
       title: title,
       setTitle: setTitle,
       company: company,
@@ -29,11 +32,21 @@ function Dashboard() {
     }
 
     const resetForm = () => {
+      setId("");
       setTitle("");
       setCompany("");
       setSalary("");
       setLocation("");
       setApplyDate("");
+    }
+
+    const updateForm = (job) => {
+      setId(job.id);
+      setTitle(job.title);
+      setCompany(job.company);
+      setSalary(job.salary);
+      setLocation(job.location);
+      setApplyDate(job.applyDate);
     }
 
     const fetchJobs = async () => {
@@ -52,7 +65,7 @@ function Dashboard() {
     const createJob = async () => {
       const form = document.querySelector("#job-form");
       if (form.checkValidity() === false) {
-        alert("Please enter a title, company, and apply date.")
+        alert("Please complete the form.")
         return;
       }
       const job = {
@@ -81,6 +94,50 @@ function Dashboard() {
         resetForm();
       } catch (error) {
         console.log(error);
+      }
+    }
+
+    const updateJob = async (id) => {
+      const form = document.querySelector("#job-form");
+      if (form.checkValidity() === false) {
+        alert("Please complete the form.")
+        return;
+      }
+      const job = {
+        id: id,
+        title: title,
+        company: company,
+        salary: salary,
+        location: location,
+        apply_date: applyDate,
+      }
+      try {
+        const url = `/api/jobs/${id}`;
+        const headers = {
+          "Content-Type": "application/json",
+        };
+        const response = await fetch(url, {
+          method: "PUT",
+          body: JSON.stringify(job),
+          headers: headers,
+        });
+        if (!response.ok) {
+          const error = await response.text();
+          console.log(error);
+          return;
+        }
+        await fetchJobs();
+        resetForm();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    const saveJob = async() => {
+      if (id) {
+        updateJob(id);
+      } else {
+        createJob();
       }
     }
 
@@ -113,13 +170,14 @@ function Dashboard() {
             <div>
               <DashboardTable 
                 jobs={jobs}
+                updateForm={updateForm}
                 deleteJob={deleteJob}
               />
             </div>
             <div>
               <JobForm 
                 form={form}
-                createJob={createJob}
+                saveJob={saveJob}
               />
             </div>
           </div>
