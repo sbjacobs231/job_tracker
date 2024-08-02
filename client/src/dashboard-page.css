@@ -71,6 +71,11 @@ div.dashboard-page table {
   border-collapse: collapse;
 }
 
+div.dashboard-page td i {
+  cursor: pointer;
+  padding: .5rem;
+}
+
 div.dashboard-page td, th {
   max-width: 10rem;
   padding: 1.5rem;
