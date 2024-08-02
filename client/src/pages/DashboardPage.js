@@ -9,10 +9,32 @@ function Dashboard() {
     const navigate = useNavigate();
 
     const [jobs, setJobs] = useState([]);
+    const [title, setTitle] = useState("");
+    const [company, setCompany] = useState("");
+    const [salary, setSalary] = useState("");
+    const [location, setLocation] = useState("");
+    const [applyDate, setApplyDate] = useState("");
 
-    useEffect(() => {
-      fetchJobs();
-    }, []);
+    const form = {
+      title: title,
+      setTitle: setTitle,
+      company: company,
+      setCompany: setCompany,
+      salary: salary,
+      setSalary: setSalary,
+      location: location,
+      setLocation: setLocation,
+      applyDate: applyDate,
+      setApplyDate: setApplyDate,
+    }
+
+    const resetForm = () => {
+      setTitle("");
+      setCompany("");
+      setSalary("");
+      setLocation("");
+      setApplyDate("");
+    }
 
     const fetchJobs = async () => {
       try {
@@ -27,6 +49,45 @@ function Dashboard() {
       }
     }
 
+    const createJob = async () => {
+      const form = document.querySelector("#job-form");
+      if (form.checkValidity() === false) {
+        alert("Please enter a title, company, and apply date.")
+        return;
+      }
+      const job = {
+        title: title,
+        company: company,
+        salary: salary,
+        location: location,
+        apply_date: applyDate,
+      }
+      try {
+        const url = "/api/jobs";
+        const headers = {
+          "Content-Type": "application/json",
+        };
+        const response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(job),
+          headers: headers,
+        });
+        if (!response.ok) {
+          const error = await response.text();
+          console.log(error);
+          return;
+        }
+        await fetchJobs();
+        resetForm();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    useEffect(() => {
+      fetchJobs();
+    }, []);
+
     return (
       <div>
         <div className="dashboard-page align-center">
@@ -38,9 +99,8 @@ function Dashboard() {
             </div>
             <div>
               <JobForm 
-                jobs={jobs} 
-                setJobs={setJobs} 
-                fetchJobs={fetchJobs} 
+                form={form}
+                createJob={createJob}
               />
             </div>
           </div>
