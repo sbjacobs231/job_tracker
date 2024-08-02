@@ -10,7 +10,7 @@ function DashboardTable({ jobs }) {
                         <th scope="col">Salary</th>
                         <th scope="col">Location</th>
                         <th scope="col">Apply Date</th>
-                        <th scope="col">Status</th>
+                        <th scope="col" colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,7 +22,8 @@ function DashboardTable({ jobs }) {
                         <td>{job.salary}</td>
                         <td>{job.location}</td>
                         <td>{job.apply_date.split("T")[0]}</td>
-                        <td>{job.status}</td>
+                        <td><i id="update-job" className="bi bi-pencil"></i></td>
+                        <td><i id="delete-job" className="bi bi-trash"></i></td>
                     </tr>
                     ))}
                 </tbody>
