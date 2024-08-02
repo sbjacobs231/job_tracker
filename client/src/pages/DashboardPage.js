@@ -84,6 +84,24 @@ function Dashboard() {
       }
     }
 
+    const deleteJob = async (id) => {
+      try {
+        const url = `/api/jobs/${id}`;
+        const response = await fetch(url, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          const error = await response.text();
+          console.log(error);
+          return;
+        }
+        await fetchJobs();
+        resetForm();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     useEffect(() => {
       fetchJobs();
     }, []);
@@ -94,7 +112,8 @@ function Dashboard() {
           <div className="content">
             <div>
               <DashboardTable 
-                jobs={jobs} 
+                jobs={jobs}
+                deleteJob={deleteJob}
               />
             </div>
             <div>
