@@ -18,7 +18,7 @@ CREATE TABLE job (
     salary DECIMAL(10, 2) NULL,
     location VARCHAR(255) NOT NULL,
     apply_date DATE NOT NULL,
-    status INT NOT NULL,
+    status INT NULL,
     PRIMARY KEY (id)
 );
 CREATE TABLE status (
