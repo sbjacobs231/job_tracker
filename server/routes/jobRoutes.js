@@ -79,9 +79,14 @@ const router = express.Router();
 
 // Get all jobs
 router.get('/', authenticateToken, async (req, res) => {
-    const sql = 'SELECT * FROM job';
+    const userId = req.user.id;
+    const sql = `
+        SELECT * FROM job
+        JOIN user_job ON job.id = user_job.job_id
+        WHERE user_job.user_id = ?
+    `;
     try {
-        const [results] = await pool.query(sql);
+        const [results] = await pool.query(sql, [userId]);
         res.json(results);
     } catch (err) {
         res.status(500).send(err);
@@ -89,7 +94,7 @@ router.get('/', authenticateToken, async (req, res) => {
 });
 
 // Get job by ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticateToken, async (req, res) => {
     const { id } = req.params;
     const sql = 'SELECT * FROM job WHERE id = ?';
     try {
@@ -101,19 +106,25 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create new job
-router.post('/', async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
+    const userId = req.user.id;
     const { title, company, salary, location, apply_date } = req.body;
-    const sql = 'INSERT INTO job (title, company, salary, location, apply_date) VALUES (?, ?, ?, ?, ?)';
+    const sqlJob = `
+        INSERT INTO job (title, company, salary, location, apply_date)
+        VALUES (?, ?, ?, ?, ?)
+    `;
+    const sqlUserJob = 'INSERT INTO user_job (user_id, job_id) VALUES (?, ?)'
     try {
-        const [result] = await pool.query(sql, [title, company, salary, location, apply_date]);
-        res.json({ id: result.insertId, title, company, salary, location, apply_date });
+        const [jobResult] = await pool.query(sqlJob, [title, company, salary, location, apply_date]);
+        await pool.query(sqlUserJob, [userId, jobResult.insertId])
+        res.json({ id: jobResult.insertId, title, company, salary, location, apply_date });
     } catch (err) {
         res.status(500).send(err);
     }
 });
 
 // Update job (by id)
-router.put('/:id', async (req, res) => {
+router.put('/:id', authenticateToken, async (req, res) => {
     const { id } = req.params;
     const { title, company, salary, location, apply_date } = req.body;
     const sql = 'UPDATE job SET title = ?, company = ?, salary = ?, location = ?, apply_date = ? WHERE id = ?';
@@ -127,11 +138,13 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete job (by id)
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticateToken, async (req, res) => {
     const { id } = req.params;
-    const sql = 'DELETE FROM job WHERE id = ?';
+    const userJobSql = 'DELETE FROM user_job WHERE job_id = ?'
+    const jobSql = 'DELETE FROM job WHERE id = ?';
     try {
-        await pool.query(sql, [id]);
+        await pool.query(userJobSql, [id])
+        await pool.query(jobSql, [id]);
         res.json({ message: 'Job deleted successfully' });
     } catch (err) {
         res.status(500).send(err);
