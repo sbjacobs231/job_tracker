@@ -1,0 +1,28 @@
+.hero {
+    background-image: url('../assets/background.png');
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.features-section {
+    margin-top: 4rem;
+}
+
+.features-section h2 {
+    margin-top: 1rem;
+}
+
+.features-section .btn {
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: auto;
+        text-align: center;
+    } 
+}
