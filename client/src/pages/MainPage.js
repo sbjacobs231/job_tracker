@@ -1,7 +1,11 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import './mainpage.css';
+import Marketing from '../components/Marketing';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave, faTasks, faChartLine } from '@fortawesome/free-solid-svg-icons';
+
 
 function MainPage() {
     const navigate = useNavigate(); // Initialize useNavigate
@@ -16,46 +20,30 @@ function MainPage() {
 
     return (
         <div>
-            <div className="p-5 text-center bg-light">
+            <Container className="hero p-5 bg-light">
                 <Row>
                     <Col>
-                        <h1 className="mb-3">Welcome to Job Tracker</h1>
-                        <p className="p-3">
-                        Lorem ipsum dolor sit amet. Rem officia distinctio et galisum Quis ut illum voluptas. Et maxime rerum ut sequi enim non commodi itaque et dolor quia et porro libero ut doloremque vero. Aut dolores error ut commodi voluptatem qui eveniet deserunt et earum eius ut aspernatur repellendus.
-                        </p>
+                        <h1 className="hero-header">Track & Organize <br></br>Your Job Search</h1>
+                        <p className="hero-text">The leading tool for organizing, tracking,<br></br> and managing all of your job applications in one place.</p>
                         <div className="hero-buttons">
                         <Button variant="primary" className="m-2" onClick={handleSignupClick}>Sign Up</Button>
                         <Button variant="secondary" className="m-2" onClick={handleLoginClick}>Login</Button>
                         </div>
                     </Col>
                 </Row>
-            </div>
+            </Container>
             <Container className="features-section text-center">
                 <Row>
-                <Col md={3}>
-                    <div className="feature-box mt-5">
-                    <i className="bi bi-globe fs-5"></i>
-                    <p>Use this space to promote the business, its products or its services.</p>
-                    </div>
-                </Col>
-                <Col md={3}>
-                    <div className="feature-box mt-5">
-                    <i className="bi bi-pencil fs-5"></i>
-                    <p>Use this space to promote the business, its products or its services.</p>
-                    </div>
-                </Col>
-                <Col md={3}>
-                    <div className="feature-box mt-5">
-                    <i className="bi bi-eye fs-5"></i>
-                    <p>Use this space to promote the business, its products or its services.</p>
-                    </div>
-                </Col>
-                <Col md={3}>
-                    <div className="feature-box mt-5">
-                    <i className="bi bi-heart fs-5"></i>
-                    <p>Use this space to promote the business, its products or its services.</p>
-                    </div>
-                </Col>
+                    <Col md={4}>
+                        <Marketing icon={faSave} heading="Save Jobs" text="Save jobs throughout your search. A fast, convenient way to bookmark jobs."/>
+                    </Col>
+                    <Col md={4}>
+                        <Marketing icon={faTasks} heading="Track & Organize" text="Keep a high level view of your job search pipeline." />
+                    
+                    </Col>
+                    <Col md={4}>
+                        <Marketing icon={faChartLine} heading="Get Insights" text="View rich keyword & skill insights for every job." />
+                    </Col>
                 </Row>
             </Container>
 
