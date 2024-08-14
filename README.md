@@ -86,6 +86,7 @@ You can explore the features of Job Tracker either in the development environmen
 - To remove a job, click the trash icon in the corresponding row. The job will be deleted from the table, and the “Apply Count Per Day” chart will update accordingly.
 
 
+
 ## Collaborators
 - [Sky Jacobson](https://github.com/sbjacobs231)
 - [Su Youn Jeon](https://github.com/tndus604)
